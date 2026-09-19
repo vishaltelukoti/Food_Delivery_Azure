@@ -17,7 +17,8 @@ from app.models import (
 app = FastAPI(
     title="Food Delivery API",
     version="1.0.0",
-    description="Backend API for the Food Delivery platform",
+    description="Backend API for Food Delivery platform",
+    openapi_version="3.0.3"
 )
 
 # Move forward one step at a time. Cancellation is allowed before dispatch.
