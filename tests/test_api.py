@@ -50,11 +50,13 @@ async def test_health(client: AsyncClient) -> None:
     assert response.json() == {"status": "healthy"}
 
 
-async def test_openapi_uses_latest_version(client: AsyncClient) -> None:
-    """The generated schema advertises the configured OpenAPI version."""
+async def test_openapi_schema(client: AsyncClient) -> None:
+    """The generated OpenAPI schema is available for APIM import."""
     response = await client.get("/openapi.json")
     assert response.status_code == 200
-    assert response.json()["openapi"] == "3.2.1"
+    schema = response.json()
+    assert schema["info"]["title"] == "Food Delivery API"
+    assert schema["info"]["version"] == "1.0.0"
 
 
 async def test_get_restaurants(client: AsyncClient) -> None:

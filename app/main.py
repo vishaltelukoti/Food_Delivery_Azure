@@ -14,8 +14,11 @@ from app.models import (
     StatusUpdate,
 )
 
-app = FastAPI(title="Food Delivery API")
-app.openapi_version = "3.2.1"
+app = FastAPI(
+    title="Food Delivery API",
+    version="1.0.0",
+    description="Backend API for the Food Delivery platform",
+)
 
 # Move forward one step at a time. Cancellation is allowed before dispatch.
 ALLOWED_TRANSITIONS: dict[OrderStatus, set[OrderStatus]] = {

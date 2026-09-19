@@ -44,7 +44,7 @@ class OrderCreate(RequestModel):
     """Client-supplied order details; IDs, totals, and status are server-owned."""
 
     customer_name: str = Field(min_length=1)
-    restaurant_id: int
+    restaurant_id: int = Field(gt=0)
     items: list[OrderItem] = Field(min_length=1)
 
 
