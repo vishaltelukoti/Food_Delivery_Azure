@@ -50,6 +50,13 @@ async def test_health(client: AsyncClient) -> None:
     assert response.json() == {"status": "healthy"}
 
 
+async def test_openapi_uses_latest_version(client: AsyncClient) -> None:
+    """The generated schema advertises the configured OpenAPI version."""
+    response = await client.get("/openapi.json")
+    assert response.status_code == 200
+    assert response.json()["openapi"] == "3.2.1"
+
+
 async def test_get_restaurants(client: AsyncClient) -> None:
     """The restaurant list includes the expected sample data."""
     response = await client.get("/restaurants")
