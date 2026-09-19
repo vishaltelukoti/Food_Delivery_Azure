@@ -55,6 +55,7 @@ async def test_openapi_schema(client: AsyncClient) -> None:
     response = await client.get("/openapi.json")
     assert response.status_code == 200
     schema = response.json()
+    assert schema["openapi"] == "3.0.3"
     assert schema["info"]["title"] == "Food Delivery API"
     assert schema["info"]["version"] == "1.0.0"
 

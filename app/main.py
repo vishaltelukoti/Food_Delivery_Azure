@@ -18,8 +18,8 @@ app = FastAPI(
     title="Food Delivery API",
     version="1.0.0",
     description="Backend API for Food Delivery platform",
-    openapi_version="3.0.3"
 )
+app.openapi_version = "3.0.3"
 
 # Move forward one step at a time. Cancellation is allowed before dispatch.
 ALLOWED_TRANSITIONS: dict[OrderStatus, set[OrderStatus]] = {
