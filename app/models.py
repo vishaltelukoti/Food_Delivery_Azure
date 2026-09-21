@@ -6,9 +6,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 
 class RequestModel(BaseModel):
-    """Trim request strings and reject fields outside the declared schema."""
+    """Trim request strings before validation."""
 
-    model_config = ConfigDict(str_strip_whitespace=True, extra="forbid")
+    model_config = ConfigDict(str_strip_whitespace=True)
 
 
 class OrderStatus(str, Enum):
@@ -36,7 +36,7 @@ class OrderItem(RequestModel):
     """An item with a nonblank name, positive quantity, and nonnegative price."""
 
     name: str = Field(min_length=1)
-    quantity: int = Field(gt=0, strict=True)
+    quantity: int = Field(strict=True)
     price: float = Field(ge=0, allow_inf_nan=False)
 
 
@@ -44,7 +44,7 @@ class OrderCreate(RequestModel):
     """Client-supplied order details; IDs, totals, and status are server-owned."""
 
     customer_name: str = Field(min_length=1)
-    restaurant_id: int = Field(gt=0)
+    restaurant_id: int
     items: list[OrderItem] = Field(min_length=1)
 
 
